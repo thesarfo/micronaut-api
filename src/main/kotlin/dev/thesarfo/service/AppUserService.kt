@@ -19,9 +19,16 @@ class AppUserService(
         return appUserRepository.findAll().toList();
     }
 
-    fun getSingleUserById(id: String): AppUser? {
+    fun getSingleUserById(id: String): AppUser {
         return appUserRepository.findById(id)
             .orElseThrow { HttpStatusException(HttpStatus.NOT_FOUND, "User with id $id not found") }
+    }
+
+    fun update(id: String, appUser: AppUser): AppUser {
+        val found = getSingleUserById(id);
+        val updated = appUser.copy(id = found.id);
+
+        return appUserRepository.update(updated)
     }
 
 //    fun getUserById(id: String) : AppUser{

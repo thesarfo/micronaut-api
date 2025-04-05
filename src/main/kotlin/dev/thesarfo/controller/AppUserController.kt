@@ -28,6 +28,16 @@ class AppUserController(
     fun getById(@PathVariable("id") id: String) =
         appUserService.getSingleUserById(id)
 
+    @Put("/{id}")
+    fun update(
+        id: String,
+        @Body request: AppUserRequest,
+        @Header("X-Foo") header: String
+    ): AppUser {
+        println("Header: $header")
+        return appUserService.update(id, request.toModel());
+    }
+
 
     private fun AppUserRequest.toModel(): AppUser =
         AppUser(
