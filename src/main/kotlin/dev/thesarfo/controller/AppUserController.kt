@@ -5,10 +5,7 @@ import dev.thesarfo.model.AppUser
 import dev.thesarfo.request.AppUserRequest
 import dev.thesarfo.service.AppUserService
 import io.micronaut.http.HttpStatus
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Post
-import io.micronaut.http.annotation.Status
+import io.micronaut.http.annotation.*
 
 @Controller("/user")
 class AppUserController(
@@ -21,6 +18,15 @@ class AppUserController(
         appUserService.create(
             appUser = appUserRequest.toModel()
         )
+
+    @Get
+    @Status(HttpStatus.OK)
+    fun getUsers() =
+        appUserService.getAllUsers()
+
+    @Get("/{id}")
+    fun getById(@PathVariable("id") id: String) =
+        appUserService.getSingleUserById(id)
 
 
     private fun AppUserRequest.toModel(): AppUser =
