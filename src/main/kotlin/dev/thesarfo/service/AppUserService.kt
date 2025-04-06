@@ -31,6 +31,10 @@ class AppUserService(
         return appUserRepository.update(updated)
     }
 
+    fun delete(id: String) {
+        appUserRepository.deleteById(id);
+    }
+
 //    fun getUserById(id: String) : AppUser{
 //        return appUserRepository.findById(id).orElse
 //    }

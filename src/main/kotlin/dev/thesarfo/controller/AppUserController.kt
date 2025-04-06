@@ -38,6 +38,13 @@ class AppUserController(
         return appUserService.update(id, request.toModel());
     }
 
+    @Delete("/{id}")
+    @Status(HttpStatus.NO_CONTENT)
+    fun delete(
+        id: String
+    ) {
+        return appUserService.delete(id);
+    }
 
     private fun AppUserRequest.toModel(): AppUser =
         AppUser(
